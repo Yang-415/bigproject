@@ -50,29 +50,11 @@
             </div>
         </div>
     </div>
+    <script src="./js/utilities/user.js"></script>
     <script>
         //1.给登陆按钮添加点击事件获取 userName和passWord的val值,并判断如果为空弹出提示框;
         // 2.点击事件之后查询接口发送请求并把相应的参数传进去;
         // 3.对象化管理login的数据请求;
-        var user = {
-            login: function (userName,passWord) {
-                $.post(
-                    "http://localhost:8000/admin/login",
-                    {
-                        user_name: userName,
-                        password: passWord,
-                    },
-                    function (res) {
-                        if (res.code === 400) {
-                            $(".modal_html").html(res.msg)
-                            $('.modal').modal('show')
-                        }
-                        else if (res.code === 200) {
-                            window.location.href = "index.html"
-                        }
-                    })
-            }
-        }
         $(".input_sub").click(function () {
             var userName = $(".input_txt").val().trim();
             var passWord = $(".input_pass").val().trim();
@@ -80,7 +62,15 @@
                 $(".modal_html").html("用户名或密码不能为空")
                 $('.modal').modal("show")
             }
-            user.login(userName,passWord)
+            user.login(userName,passWord,function(res){
+                if (res.code === 400) {
+                    $(".modal_html").html(res.msg)
+                    $('.modal').modal('show')
+                }
+                else if (res.code === 200) {
+                    window.location.href = "index.html"
+                }
+            })
         })
     </script>
 </body>

@@ -77,6 +77,7 @@
             </div>
         </div>
     </div>
+    <script src="./js/utilities/user.js"></script>
     <script>
         var $level01 = $('.level01');
         var $subli = $('.level02 li')
@@ -128,15 +129,6 @@
         // 1.获取元素，添加点击事件；
         // 2.查找接口，发送请求；
         // 3.对象化管理logout
-        var user = {
-            logout: function () {
-                $.post(
-                    "http://localhost:8000/admin/logout",
-                    function () {
-                        window.location.href = "login.html"
-                    })
-            }
-        }
         $(".logout").click(function () {
             $(".modal_html").html("你确定要退出吗？")
             $('.modal').modal("show")
@@ -146,7 +138,9 @@
             return;
         })
         $(".btn-default").click(function () {
-            user.logout()
+            user.logout(function(a){
+                window.location.href = "login.html"
+            })
         })
     </script>
 
