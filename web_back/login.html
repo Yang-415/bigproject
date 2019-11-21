@@ -9,6 +9,9 @@
     <link rel="stylesheet" type="text/css" href="css/reset.css">
     <link rel="stylesheet" type="text/css" href="css/iconfont.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
+    <script src="./js/jquery-1.12.4.min.js"></script>
+    <script src="./js/bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="./js/bootstrap/css/bootstrap.min.css">
 </head>
 
 <body>
@@ -28,11 +31,54 @@
                 <input type="button" class="input_sub" value="登 录">
             </form>
         </div>
+    </div>
+    <div class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Modal title</h4>
+                </div>
+                <div class="modal-body">
+                    <p class="modal_html"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(".input_sub").click(function () {
+            var userNanme = $(".input_txt").val().trim();
+            var passWord = $(".input_pass").val().trim();
+            $.ajax({
+                url: "http://localhost:8000/admin/login",
+                type: "post",
+                data: {
+                    user_name: userNanme,
+                    password: passWord
+                },
+                success: function (res) {
+                    if (res.code === 400) {
+                        $(".modal_html").html(res.msg)
+                        $('.modal').modal('show')
+                        if (userNanme == "" || userPassword == "") {
+                            $(".modal_html").html("用户名或密码不能为空")
+                            $('.modal').modal("show")
+                        }
+                    }
+                    else if (res.code === 200) {
 
-    </div> 
-     <script src="./js/jquery-1.12.4.min.js"></script>
-     <script>
-     </script>
+                        window.location.href="index.html"
+                    }
+                }
+            })
+
+        })
+    </script>
 </body>
 
 </html>
