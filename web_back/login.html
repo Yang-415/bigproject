@@ -54,29 +54,25 @@
         $(".input_sub").click(function () {
             var userNanme = $(".input_txt").val().trim();
             var passWord = $(".input_pass").val().trim();
-            $.ajax({
-                url: "http://localhost:8000/admin/login",
-                type: "post",
-                data: {
+            if (userNanme == "" || passWord == "") {
+                $(".modal_html").html("用户名或密码不能为空")
+                $('.modal').modal("show")
+            }
+            $.post(
+                "http://localhost:8000/admin/login",
+                {
                     user_name: userNanme,
-                    password: passWord
+                    password: passWord,
                 },
-                success: function (res) {
+                function (res) {
                     if (res.code === 400) {
                         $(".modal_html").html(res.msg)
                         $('.modal').modal('show')
-                        if (userNanme == "" || userPassword == "") {
-                            $(".modal_html").html("用户名或密码不能为空")
-                            $('.modal').modal("show")
-                        }
                     }
                     else if (res.code === 200) {
-
-                        window.location.href="index.html"
+                        window.location.href = "index.html"
                     }
-                }
-            })
-
+                })
         })
     </script>
 </body>
