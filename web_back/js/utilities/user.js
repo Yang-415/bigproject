@@ -24,5 +24,6 @@ var user = {
             function(res){
                 callback(res)
             })
-    },
+    }
+    
 }
