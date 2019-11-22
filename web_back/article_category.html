@@ -29,32 +29,6 @@
                     </tr>
                 </thead>
                 <tbody class="cateTable">
-                    <!-- <tr>
-                        <td>未分类</td>
-                        <td>uncategorized</td>
-                        <td class="text-center">
-                            <a href="javascript:editTr({&quot;id&quot;:&quot;1&quot;,&quot;slug&quot;:&quot;uncategorized&quot;,&quot;name&quot;:&quot;未分类&quot;});"
-                                class="btn btn-info btn-xs">编辑</a>
-                            <a href="javascript:deleteTr( 1 );" class="btn btn-danger btn-xs">删除</a>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>奇趣事</td>
-                        <td>funny</td>
-                        <td class="text-center">
-                            <a href="javascript:editTr({&quot;id&quot;:&quot;2&quot;,&quot;slug&quot;:&quot;funny&quot;,&quot;name&quot;:&quot;奇趣事&quot;});"
-                                class="btn btn-info btn-xs">编辑</a>
-                            <a href="javascript:deleteTr( 2 );" class="btn btn-danger btn-xs">删除</a>
-                        </td>
-                    </tr>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="3" class="text-center">
-                            <a href="#" class="btn btn-success" data-toggle="modal" data-target="#addModal">新增分类</a>
-                        </td>
-                    </tr> -->
                 </tfoot>
             </table>
         </div>
@@ -86,6 +60,7 @@
             </div>
         </div>
     </div>
+    <script src="./js/utilities/APIURL.js"></script>
     <script src="./js/utilities/category.js"></script>
     <script src="./js/template-web.js"></script>
     <script>
@@ -125,7 +100,7 @@
         {{/each}}
        </script>
     <script>
-        // 1.获取用户信息
+        // 1.获取用户信息显示;
         function getAndshow() {
             category.show(function (res) {
                 var tempStr = template("tmp", res);
@@ -134,10 +109,13 @@
             })
         }
         getAndshow()
+        // 2.文章类别删除功能实现;
+    // 先通过事件委托获取每一个tr的id值,这个id属性是自定义的;在将获取的id传给后端发请求实现删除功能,在删除前弹出confirm框友情询问,确定删除后调用发请求全部显示的功能;
         $(".cateTable").on("click", ".del", function () {
             var id = $(this).attr("get_id");
-            console.log(id);
-            
+            if(confirm("你确定要删除此项吗?")==false){
+                return;
+            }
             category.dele(id, function (res) {
                 if (res.code == 200) {
                 console.log(res);  

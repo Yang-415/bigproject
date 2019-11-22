@@ -1,15 +1,15 @@
-var baseUser="http://localhost:8000/"
+
 var user = {
     logout: function (callback) {
         $.post(
-           baseUser+'admin/logout',
+            APIURLS.userLogout,
             function (res) { 
                 callback(res)
             })
     },
     login: function (userName,passWord,callback) {
         $.post(
-            baseUser+'admin/login',
+            APIURLS.userLogin,
             {
                 user_name: userName,
                 password: passWord,
@@ -20,7 +20,7 @@ var user = {
     },
     getinfo:function(callback){
         $.get(
-            baseUser+"admin/getuser",
+            APIURLS.userGetsur,
             function(res){
                 callback(res)
             })
