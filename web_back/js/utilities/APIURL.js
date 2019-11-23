@@ -9,6 +9,6 @@ var APIURLS={
     userLogin:BASEURLS+"login",
     userGetsur:BASEURLS+"getuser",
     userLogout:BASEURLS+"logout",
-    // 文章
-    userLogout:BASEURLS+"search",
+    // 文章搜索接口
+    articleShow:BASEURLS+"search",
 }

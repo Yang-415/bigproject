@@ -52,7 +52,7 @@
         <div class="user_center_link">
             <a href="user.html" onclick="setMenu(3,0)" target="main_frame">个人中心</a>
             <img src="images/2.jpg" alt="person" class="userImg">
-            <a href="#"><i class="iconfont icon-tuichu logout"></i> 退出</a>
+            <a href="#"><i class="iconfont icon-tuichu quiet"></i> 退出</a>
         </div>
     </div>
     <div class="main" id="main_body">
@@ -72,7 +72,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">是</button>
-                    <button type="button" class="btn btn-primary">否</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">否</button>
                 </div>
             </div>
         </div>
@@ -138,19 +138,19 @@
         // 1.获取元素，添加点击事件；
         // 2.查找接口，发送请求；
         // 3.对象化管理logout
-        $(".logout").click(function () {
+        $(".quiet").click(function () {
             $(".modal_html").html("你确定要退出吗？")
             $('.modal').modal("show")
-        })
-        $(".btn-primary").click(function () {
-            $(".modal").modal("hide")
-            return;
-        })
+        });
         $(".btn-default").click(function () {
-            user.logout(function(a){
+            //console.log(123);
+            
+            user.logout(function(res){
+                console.log(321);
+                
                 window.location.href = "login.html"
             })
-        })
+        });
     </script>
 
 </body>
