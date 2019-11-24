@@ -75,8 +75,8 @@
                 </div>
                 <div class="modal-body">
                     <form>
-                        <div class="form-group">
-                            <label for="recipient-name" class="control-label">分类名称:</label>
+                        <div class="form-group" style="display: none;">
+                            <label for="recipient-name" class="control-label">分类id:</label>
                             <input type="text" class="form-control" id="cate_id">
                         </div>
                         <div class="form-group">
@@ -101,7 +101,7 @@
     <script src="./js/template-web.js"></script>
     <script id="tmp" type="text/html">
             {{each data item}}
-        <tr>
+           <tr>
                 <td>{{item.name}}</td>
                 <td>{{item.slug}}</td>
                 <td class="text-center">
@@ -116,6 +116,8 @@
         // 1.获取用户信息显示;
         function getAndshow() {
             category.show(function (res) {
+                console.log(res);
+
                 if (res.code == 200) {
                     var tempStr = template("tmp", res);
                     $(".cateTable").html(tempStr)
@@ -158,6 +160,10 @@
             var id = $("#cate_id").val();
             var name = $("#cate_name").val();
             var slug = $("#cate_slug").val();
+            if (name == "" || slug == "") {
+                alert("内容不能为空");
+                return;
+            }
             category.edit({ id, name, slug }, function (res) {
                 if (res.code == 200) {
                     getAndshow()
@@ -170,8 +176,12 @@
             // 获取name和slug值；
             var name = $("#cate_add_name").val();
             var slug = $("#cate_add_slug").val();
+            if (name == "" || slug == "") {
+                alert("内容不能为空");
+                return;
+            }
             category.add({ name, slug }, function (res) {
-                if(res.code==200){
+                if (res.code == 200) {
                     getAndshow()
                 }
             })

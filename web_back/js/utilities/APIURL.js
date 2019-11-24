@@ -11,4 +11,6 @@ var APIURLS={
     userLogout:BASEURLS+"logout",
     // 文章搜索接口
     articleShow:BASEURLS+"search",
+    articleDele:BASEURLS+"article_delete",
+    articlePublish:BASEURLS+"article_publish",
 }
